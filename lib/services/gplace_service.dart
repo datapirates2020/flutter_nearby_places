@@ -20,8 +20,17 @@ class LocationService {
 
     List data = json.decode(reponse.body)["results"];
     var places = <PlaceDetail>[];
-    data.forEach((f) => places.add(new PlaceDetail(f["place_id"], f["name"],
-        f["icon"], f["rating"].toString(), f["vicinity"])));
+    data.forEach(
+      (f) => places.add(
+        new PlaceDetail(
+          f["place_id"],
+          f["name"],
+          f["icon"],
+          f["rating"].toString(),
+          f["vicinity"],
+        ),
+      ),
+    );
 
     return places;
   }
@@ -30,7 +39,6 @@ class LocationService {
     var response = await http
         .get(detailUrl + place_id, headers: {"Accept": "application/json"});
     var result = json.decode(response.body)["result"];
-   
 
     List<String> weekdays = [];
     if (result["opening_hours"] != null)
